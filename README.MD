@@ -21,7 +21,7 @@ $ npm test
 ## Contribute
 
 Fork this repo and push in your ideas.
-Do not forget to add a bit of test(s) of what value you adding. I use [git-flow](https://github.com/nvie/gitflow), you can check it out for branching model
+Do not forget to add a bit of test(s) of what value you adding.
 
 
 
