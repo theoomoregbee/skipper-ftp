@@ -1,0 +1,26 @@
+{
+  "name": "skipper-ftp",
+  "version": "0.0.0",
+  "description": "This is used to upload files directly to FTP server skipper adapter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theo4u/skipper-ftp.git"
+  },
+  "keywords": [
+    "sails",
+    "ftp",
+    "upload",
+    "skipper",
+    "adapter"
+  ],
+  "author": "Theophilus Omoregbee <theo4u@ymail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/theo4u/skipper-ftp/issues"
+  },
+  "homepage": "https://github.com/theo4u/skipper-ftp#readme"
+}
