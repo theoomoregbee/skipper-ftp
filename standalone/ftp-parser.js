@@ -9,6 +9,11 @@ module.exports = function (options) {
 
 function Parser(options) {
     this.options = options;
+
+    // this is used to handle each chunk from our transform
+    this.bodyParts = [];
+    this.bodyLength = 0;
+
     // init Transform
     stream.Transform.call(this, options);
 }
@@ -16,17 +21,26 @@ function Parser(options) {
 util.inherits(Parser, stream.Transform);
 
 Parser.prototype._transform = function (chunk, enc, cb) {
-    var self = this;
-    this.__upload(chunk, function (err) {
-        if (err) return self.emit('error', err);
-
-        return cb();
-    });
-
+    // send this to our body parts
+    this.bodyParts.push(chunk);
+    this.bodyLength += chunk.length;
+    cb();
 };
 
 Parser.prototype._flush = function (callback) {
-    return callback();
+    // finally we merge each chunk together and save it
+    var body = new Buffer(this.bodyLength);
+    var bodyPos = 0;
+    for (var i = 0; i < this.bodyParts.length; i++) {
+        this.bodyParts[i].copy(body, bodyPos, 0, this.bodyParts[i].length);
+        bodyPos += this.bodyParts[i].length;
+    }
+    var self = this;
+    this.__upload(body, function (err) {
+        if (err) return self.emit('error', err);
+
+        return callback();
+    });
 };
 
 /**
