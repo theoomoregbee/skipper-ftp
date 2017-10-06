@@ -5,7 +5,6 @@
 This is used to upload files directly to FTP server skipper adapter and [node-ftp](https://github.com/mscdex/node-ftp)
 
 
-========================================
 
 ## Installation
 
@@ -16,8 +15,6 @@ $ npm install skipper-ftp --save
 Also make sure you have skipper [installed as your body parser](http://beta.sailsjs.org/#/documentation/concepts/Middleware?q=adding-or-overriding-http-middleware).
 
 > Skipper is installed by default in [Sails](https://github.com/balderdashy/sails) v0.10.
-
-========================================
 
 
 ## Usage
