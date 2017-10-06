@@ -22,7 +22,7 @@ Also make sure you have skipper [installed as your body parser](http://beta.sail
 ## Usage
 
 ```javascript
-req.file('avatar')
+req.file('file')
 .upload({
   adapter: require('skipper-ftp'),
   host: 'ftp.localhost',
