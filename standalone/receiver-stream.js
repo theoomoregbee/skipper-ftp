@@ -35,7 +35,7 @@ module.exports = function buildFTPParserReceiverStream(options, adapter) {
         });
 
         // file name before passing to transform
-        options.filename = __newFile.filename || __newFile.fd;
+        options.filename = options.saveAs || __newFile.filename || __newFile.fd;
         // Create a new write stream to parse File stream  to FTP
         var outs__ = require('./ftp-parser')(options);
 
