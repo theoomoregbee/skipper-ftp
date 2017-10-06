@@ -1,7 +1,8 @@
 # [<img title="skipper-ftp - FTP filesystem adapter for Skipper" src="http://i.imgur.com/P6gptnI.png" width="200px" alt="skipper emblem - face of a ship's captain"/>](https://github.com/willhuang85/skipper-gridfs) Skipper FTP Adapter
 [![npm](https://img.shields.io/npm/v/skipper-ftp.svg)](https://www.npmjs.com/package/skipper-ftp)
 [![npm](https://img.shields.io/npm/l/express.svg)]()
-This is used to upload files directly to FTP server skipper adapter
+
+This is used to upload files directly to FTP server skipper adapter and [node-ftp](https://github.com/mscdex/node-ftp)
 
 
 ========================================
