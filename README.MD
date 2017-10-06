@@ -1,6 +1,55 @@
 # [<img title="skipper-ftp - FTP filesystem adapter for Skipper" src="http://i.imgur.com/P6gptnI.png" width="200px" alt="skipper emblem - face of a ship's captain"/>](https://github.com/willhuang85/skipper-gridfs) Skipper FTP Adapter
-
+[![npm](https://img.shields.io/npm/v/skipper-ftp.svg)](https://www.npmjs.com/package/skipper-ftp)
+[![npm](https://img.shields.io/npm/l/express.svg)]()
 This is used to upload files directly to FTP server skipper adapter
+
+
+========================================
+
+## Installation
+
+```
+$ npm install skipper-ftp --save
+```
+
+Also make sure you have skipper [installed as your body parser](http://beta.sailsjs.org/#/documentation/concepts/Middleware?q=adding-or-overriding-http-middleware).
+
+> Skipper is installed by default in [Sails](https://github.com/balderdashy/sails) v0.10.
+
+========================================
+
+
+## Usage
+
+```javascript
+req.file('avatar')
+.upload({
+  adapter: require('skipper-ftp'),
+  host: 'ftp.localhost',
+  port:'21',
+  username:'root',
+  password:'root',
+  path:'/'
+}, function whenDone(err, uploadedFiles) {
+  if (err) return res.negotiate(err);
+  else return res.ok({
+    files: uploadedFiles
+  });
+});
+```
+
+For more detailed usage information and a full list of available options, see the Skipper docs, especially the section on "[Uploading to GridFS](https://github.com/balderdashy/skipper#uploading-files-to-gridfs)".
+
+
+One important adapter-specific option to note is `uri`:
+
+| Option        | Type       | Details |
+|-----------    |:----------:|---------|
+| `host`         | ((string)) | An optional parameter of the host or domain. Default value: `ftp.localhost`|
+| `port` | ((number)) | An optional parameter for port. Default value :`21`|
+| `path` | ((string)) | An optional parameter if you wish to save the file in a particular path in your file server. Default value :`/`|
+| `username` | ((string)) | An optional parameter for authentication. Default value :`root`|
+| `password` | ((string)) | An optional parameter for authentication. Default value :`root`|
 
 
 ## Testing
