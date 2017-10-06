@@ -1,4 +1,6 @@
 const _ = require("lodash");
+var receiverStream = require('./standalone/receiver-stream');
+
 
 module.exports = function SkipperFTPStream(options) {
 
@@ -24,7 +26,7 @@ module.exports = function SkipperFTPStream(options) {
     };
 
     adapter.receive = function (options) {
-        return null;
+        return receiverStream(options, adapter);
     };
 
     return adapter;
