@@ -39,11 +39,6 @@ req.file('file')
 });
 ```
 
-For more detailed usage information and a full list of available options, see the Skipper docs, especially the section on "[Uploading to GridFS](https://github.com/balderdashy/skipper#uploading-files-to-gridfs)".
-
-
-One important adapter-specific option to note is `uri`:
-
 | Option        | Type       | Details |
 |-----------    |:----------:|---------|
 | `host`         | ((string)) | An optional parameter of the host or domain. Default value: `ftp.localhost`|
