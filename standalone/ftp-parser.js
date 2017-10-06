@@ -15,8 +15,6 @@ function Parser(options) {
 
 util.inherits(Parser, stream.Transform);
 
-console.log(Parser.emit);
-
 Parser.prototype._transform = function (chunk, enc, cb) {
     var self = this;
     this.__upload(chunk, function (err) {
@@ -45,10 +43,10 @@ Parser.prototype.__upload = function (chunk, cb) {
         path: this.options.path
     };
 
-
+    var self = this;
     var c = new Client();
     c.on('ready', function () {
-        c.put(chunk, FTP.path + '/' + this.options.filename, function (err) {
+        c.put(chunk, FTP.path + '/' + self.options.filename, function (err) {
             if (err) cb(err);
             c.end();
         });
