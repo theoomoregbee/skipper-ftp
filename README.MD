@@ -2,7 +2,7 @@
 [![npm](https://img.shields.io/npm/v/skipper-ftp.svg)](https://www.npmjs.com/package/skipper-ftp)
 [![npm](https://img.shields.io/npm/l/express.svg)]()
 
-This is used to upload files directly to FTP server using skipper and [node-ftp](https://github.com/mscdex/node-ftp)
+This is used to upload files directly to FTP server using [skipper](https://github.com/balderdashy/skipper) and [node-ftp](https://github.com/mscdex/node-ftp)
 
 
 
