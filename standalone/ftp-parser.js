@@ -29,7 +29,7 @@ Parser.prototype._transform = function (chunk, enc, cb) {
     if (this.bodyLength > this.options.maxBytes) {
         var maxUploadError = new Error('Max upload size exceeded.');
         maxUploadError.code = 'E_EXCEEDS_UPLOAD_LIMIT';
-        this.emit('error', maxUploadError);
+        this.emit('E_EXCEEDS_UPLOAD_LIMIT', maxUploadError);
         return cb(maxUploadError);
     }
 

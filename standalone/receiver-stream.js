@@ -51,15 +51,18 @@ module.exports = function buildFTPParserReceiverStream(options, adapter) {
         // When the file is done writing, call the callback
         outs__.on('finish', function successfullyWroteFile() {
             __newFile.byteCount = outs__.bodyLength; // this is for skipper meta data of the file
+
+            // Indicate that a file was persisted.
+            receiver__.emit('writefile', __newFile);
+            
             done();
         });
         outs__.on('error', function (err) {
-            //debug(err);
-            if (err.code === "E_EXCEEDS_UPLOAD_LIMIT") {
-                return done(err);
-            }
+            debug(err);
+        });
 
-
+        outs__.on('E_EXCEEDS_UPLOAD_LIMIT', function (err) {
+            done(err)
         });
 
 
