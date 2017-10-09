@@ -44,6 +44,9 @@ module.exports = function buildFTPParserReceiverStream(options, adapter) {
         // file name before passing to transform
         options.filename = __newFile.fd;
 
+        // extra meta data
+        __newFile.extra = {};
+
         // Create a new write stream to parse File stream  to FTP
         var outs__ = require('./ftp-parser')(options);
 
@@ -59,6 +62,7 @@ module.exports = function buildFTPParserReceiverStream(options, adapter) {
         });
         outs__.on('error', function (err) {
             debug(err);
+            __newFile.extra.error = err; //in case it was finished with error
         });
 
         outs__.on('E_EXCEEDS_UPLOAD_LIMIT', function (err) {

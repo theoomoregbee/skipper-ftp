@@ -44,6 +44,9 @@ req.file('file')
 | `username` | ((string)) | An optional parameter for authentication. Default value :`root`|
 | `password` | ((string)) | An optional parameter for authentication. Default value :`root`|
 
+## UploadedFiles
+The meta data is returned along with **`extra`** which may contain `error` field. The `error` is going to return ana error encountered while uploading the file to your FTP server
+
 ## Testing
 
 * Clone this repository
