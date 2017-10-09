@@ -62,7 +62,7 @@ $ npm test
 ## Contribute
 
 Fork this repo and push in your ideas.
-Do not forget to add a bit of test(s) of what value you adding.
+Do not forget to follow [skipper-adapter-test](https://github.com/balderdashy/skipper-adapter-tests) standards
 
 
 
