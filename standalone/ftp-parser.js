@@ -63,11 +63,11 @@ Parser.prototype._flush = function (callback) {
  * @private
  */
 Parser.prototype.__upload = function (chunk, cb) {
-     
+
     var self = this;
     var c = new Client();
     c.on('ready', function () {
-        c.put(chunk, FTP.path + '/' + self.options.filename, function (err) {
+        c.put(chunk, self.options.path + '/' + self.options.filename, function (err) {
             if (err) cb(err);
             c.end();
         });
