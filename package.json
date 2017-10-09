@@ -1,6 +1,6 @@
 {
   "name": "skipper-ftp",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "description": "This is used to upload files directly to FTP server skipper adapter",
   "main": "index.js",
   "scripts": {
