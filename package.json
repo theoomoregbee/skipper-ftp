@@ -27,6 +27,7 @@
     "skipper-adapter-tests": "^1.5.8"
   },
   "dependencies": {
+    "flushwritable": "^1.0.0",
     "ftp": "^0.3.10",
     "lodash": "^4.17.4"
   }

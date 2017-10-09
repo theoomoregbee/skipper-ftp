@@ -1,6 +1,6 @@
-var stream = require('stream');
 var util = require('util');
 var Client = require('ftp');
+var FlushWritable = require('flushwritable');
 
 module.exports = function (options) {
     return new Parser(options);
@@ -15,12 +15,12 @@ function Parser(options) {
     this.bodyLength = 0;
 
     // init Transform
-    stream.Transform.call(this, options);
+    FlushWritable.call(this, options);
 }
 
-util.inherits(Parser, stream.Transform);
+util.inherits(Parser, FlushWritable);
 
-Parser.prototype._transform = function (chunk, enc, cb) {
+Parser.prototype._write = function (chunk, enc, cb) {
     // send this to our body parts
     this.bodyParts.push(chunk);
     this.bodyLength += chunk.length;
@@ -50,7 +50,6 @@ Parser.prototype._flush = function (callback) {
     this.__upload(body, function (err) {
         if (err) {
             self.emit('error', err);
-            return callback(err);
         }
 
         return callback();

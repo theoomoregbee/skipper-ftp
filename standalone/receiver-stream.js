@@ -54,7 +54,7 @@ module.exports = function buildFTPParserReceiverStream(options, adapter) {
 
             // Indicate that a file was persisted.
             receiver__.emit('writefile', __newFile);
-            
+
             done();
         });
         outs__.on('error', function (err) {
