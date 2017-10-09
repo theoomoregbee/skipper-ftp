@@ -24,20 +24,34 @@ Parser.prototype._transform = function (chunk, enc, cb) {
     // send this to our body parts
     this.bodyParts.push(chunk);
     this.bodyLength += chunk.length;
+
+    // check for maxBytes allowed for upload, as we get the chunks so we don't waste time to gather all chunk before checking
+    if (this.bodyLength > this.options.maxBytes) {
+        var maxUploadError = new Error('Max upload size exceeded.');
+        maxUploadError.code = 'E_EXCEEDS_UPLOAD_LIMIT';
+        this.emit('error', maxUploadError);
+        return cb(maxUploadError);
+    }
+
     cb();
 };
 
 Parser.prototype._flush = function (callback) {
+
     // finally we merge each chunk together and save it
-    var body = new Buffer(this.bodyLength);
+    var body = Buffer.alloc(this.bodyLength);
     var bodyPos = 0;
     for (var i = 0; i < this.bodyParts.length; i++) {
         this.bodyParts[i].copy(body, bodyPos, 0, this.bodyParts[i].length);
         bodyPos += this.bodyParts[i].length;
     }
+
     var self = this;
     this.__upload(body, function (err) {
-        if (err) return self.emit('error', err);
+        if (err) {
+            self.emit('error', err);
+            return callback(err);
+        }
 
         return callback();
     });

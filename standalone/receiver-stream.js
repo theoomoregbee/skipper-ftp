@@ -1,6 +1,6 @@
 var WritableStream = require('stream').Writable;
 var _ = require('lodash');
-
+var debug = require('debug')('skipper-ftp');
 
 /**
  * A simple receiver for Skipper that writes Upstreams to
@@ -15,9 +15,11 @@ var _ = require('lodash');
  */
 module.exports = function buildFTPParserReceiverStream(options, adapter) {
 
+
     var receiver__ = WritableStream({objectMode: true});
 
     receiver__._files = [];
+
 
     // This `_write` method is invoked each time a new file is received
     // from the Readable stream (Upstream) which is pumping file streams
@@ -25,27 +27,39 @@ module.exports = function buildFTPParserReceiverStream(options, adapter) {
     receiver__._write = function onFile(__newFile, encoding, done) {
 
         receiver__.once('error', function (err) {
-            // console.log('ERROR ON RECEIVER__ ::',err);
-            done(err);
+            debug(err);
         });
 
-        // Error reading from the file stream
-        __newFile.on('error', function (err) {
-            receiver__.emit('error', err);
+        __newFile.once('error', function (err) {
+            // console.log('ERROR ON file read stream in receiver (%s) ::', __newFile.filename, err);
+            // TODO: the upload has been cancelled, so we need to stop writing
+            // all buffered bytes, then call gc() to remove the parts of the file that WERE written.
+            // (caveat: may not need to actually call gc()-- need to see how this is implemented
+            // in the underlying knox-mpu module)
+            //
+            // Skipper core should gc() for us.
+            debug(err);
         });
 
         // file name before passing to transform
         options.filename = __newFile.fd;
+
         // Create a new write stream to parse File stream  to FTP
         var outs__ = require('./ftp-parser')(options);
 
 
         // When the file is done writing, call the callback
         outs__.on('finish', function successfullyWroteFile() {
+            __newFile.byteCount = outs__.bodyLength; // this is for skipper meta data of the file
             done();
         });
         outs__.on('error', function (err) {
-            receiver__.emit('error', err);
+            //debug(err);
+            if (err.code === "E_EXCEEDS_UPLOAD_LIMIT") {
+                return done(err);
+            }
+
+
         });
 
 

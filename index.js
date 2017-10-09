@@ -12,6 +12,7 @@ module.exports = function SkipperFTPStream(options) {
         password: 'root'
     });
 
+
     var adapter = {};
     adapter.rm = function (fd, cb) {
         return cb();
