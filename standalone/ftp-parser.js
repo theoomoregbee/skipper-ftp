@@ -63,13 +63,7 @@ Parser.prototype._flush = function (callback) {
  * @private
  */
 Parser.prototype.__upload = function (chunk, cb) {
-    var FTP = {
-        user: this.options.username,
-        password: this.options.password,
-        host: this.options.host,
-        path: this.options.path
-    };
-
+     
     var self = this;
     var c = new Client();
     c.on('ready', function () {
@@ -89,9 +83,5 @@ Parser.prototype.__upload = function (chunk, cb) {
     });
 
     // connect to localhost:21 as anonymous
-    c.connect({
-        host: FTP.host,
-        user: FTP.user,
-        password: FTP.password
-    });
+    c.connect(self.options);
 };

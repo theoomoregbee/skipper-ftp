@@ -8,7 +8,7 @@ module.exports = function SkipperFTPStream(options) {
         path: '/',
         host: 'localhost',
         port: 21,
-        username: 'root',
+        user: 'root',
         password: 'root'
     });
 
