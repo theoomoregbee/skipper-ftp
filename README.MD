@@ -24,7 +24,7 @@ req.file('file')
 .upload({
   adapter: require('skipper-ftp'),
   host: 'ftp.localhost',
-  port:'21',
+  port: 21,
   username:'root',
   password:'root',
   path:'/'
