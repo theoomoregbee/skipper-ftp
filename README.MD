@@ -47,7 +47,7 @@ req.file('file')
 check  [node-ftp](https://github.com/mscdex/node-ftp#methods) options for more
 
 ## UploadedFiles
-The meta data is returned along with **`extra`** which may contain `error` field. The `error` is going to return ana error encountered while uploading the file to your FTP server
+The meta data is returned along with **`extra`** which may contain `error` field. The `error` is going to return and error encountered while uploading the file to your FTP server
 
 ## Testing
 
